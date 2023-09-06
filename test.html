@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      /* Style for the image slider container */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .slider-container {
+        position: relative;
+        max-width: 100vw; /* Adjust the width as needed */
+        height: 100vh;
+        margin: 0 auto;
+        object-fit: cover;
+      }
+
+      /* Style for the images */
+      .slider-image {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        opacity: 0;
+        transition: opacity 0.5s;
+        object-fit: cover;
+      }
+      .slider-image::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 50%;
+          background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+          z-index: 17; /* Ensure the gradient layer is above the image */
+      }
+      /* Style for the slider buttons */
+      .slider-button {
+        background-color: #0074d9; /* Blue background color */
+        color: #fff; /* White text color */
+        border: none;
+        height: 40px;
+        padding: 10px 20px;
+        cursor: pointer;
+        bottom: 10px;
+        z-index: 99;
+      }
+
+      /* Style for the left button */
+      .slider-button.left {
+        left: 10px;
+      }
+
+      /* Style for the right button */
+      .slider-button.right {
+        right: 10px;
+      }
+      .button-div {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        /* position: absolute;
+        bottom: 10px;
+        right: 40%; */
+      }
+      .slider-image {
+        border-radius: 0 0 0 20% !important; /* top-right top-left bottom-right bottom-left */
+      }
+      .bottom-con{
+        display: flex;
+        height: 70px;
+        justify-content: space-evenly;
+        width: 75%;
+        position: absolute;
+        bottom: 0px;
+        padding-left: 85px;
+        padding-right: 40px;
+      }
+      .textimg{
+        display: flex;
+        color: white;
+        font-size: 20px
+      }
+      .textimg img{
+        height: 100%;
+        color: blue;
+      }
+      .clip{
+        height: 80px;
+        text-align: left;
+        width: 400px;
+        background-image: linear-gradient(to bottom, blue	rgb(0,0,255), rgba(255, 255, 255, 0.9));
+        background-color: white;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        border-radius:0 2% 0 0;
+        }
+        .clip p{
+            padding: 5px;
+        }
+        .but-con{
+            display: flex;
+            rotate: -90deg;
+            position: absolute;
+            right: -126px;
+            top: 40%;
+        }
+        .but-con p{
+            padding: 20px;
+            margin: 0 10px;
+            border-radius: 15%;
+        }
+        .blue{
+            background-color: #ADD8E6;
+        }
+        .pink{
+            background-color: hwb(301 40% 2%);
+        }
+        /* Hide mobile menu by default */
+
+
+/* Media query for small screens */
+@media (max-width: 767px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+}
+
+    </style>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+
+    <div class="header">
+      <div class="left">
+        <div class="icon-box"><i class="bx bx-menu bx-lg"></i></div>
+        <div class="icon-box"><i class="bx bx-envelope bx-lg"></i></div>
+      </div>
+      <img src="assets/img/centre-header.png" alt="" />
+      <div class="right">
+        <div class="icon-box"><i class="bx bx-search bx-lg"></i></div>
+        <div class="icon-box"><i class="bx bx-share bx-lg"></i></div>
+      </div>
+    </div>
+    
+    <div class="slider-container">
+      <img
+        class="slider-image gradient"
+        src="assets/img/mainpic.jpg"
+        alt="Image 1"
+      />
+      <img
+        class="slider-image sideCut"
+        src="assets/img/mainpic.jpg"
+        alt="Image 2"
+      />
+      <img
+        class="slider-image sideCut"
+        src="assets/img/mainpic3.jpg"
+        alt="Image 3"
+      />
+      <div class="but-con">
+        <p class="pink">Request a callback</p>
+        <p class="blue">Enroll now</p>
+      </div>
+      <div class="bottom-con">
+        <div class="textimg">
+            <h3>Announcement</h3>
+            <img src="assets/img/announcement.png" alt="">
+            <h3>Adimssions are open <br> for academic year 2022-23</h3>
+        </div>
+        <div class="button-div">
+          <button class="slider-button left" onclick="changeSlide(-1)">
+            &#9665;
+          </button>
+          <button class="slider-button right" onclick="changeSlide(1)">
+            &#9655;
+          </button>
+        </div>
+      </div>
+      <div class="clip">
+        <p><b>Empowering students</b><br>to create solutions <br><b>for tomorrow's challenges</b></p>
+    </div>
+    </div>
+
+
+    
+    <script>
+      let currentSlide = 0;
+      const slides = document.querySelectorAll(".slider-image");
+
+      function showSlide(n) {
+        slides[currentSlide].style.opacity = 0;
+        currentSlide = (n + slides.length) % slides.length;
+        slides[currentSlide].style.opacity = 1;
+      }
+
+      function changeSlide(n) {
+        showSlide(currentSlide + n);
+      }
+
+      // Initial display
+      showSlide(currentSlide);
+
+
+    </script>
+  </body>
+</html>
